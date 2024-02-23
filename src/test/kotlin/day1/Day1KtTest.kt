@@ -28,4 +28,28 @@ class Day1KtTest {
             )
         }
     }
+
+    @ParameterizedTest
+    @ArgumentsSource(UpdatedCalibrationValueArgumentsProvider::class)
+    fun `calculate updated calibration value`(
+        line: String,
+        expectedValue: Int,
+    ) {
+        assertEquals(expectedValue, getUpdatedCalibrationValue(line))
+    }
+
+    private class UpdatedCalibrationValueArgumentsProvider : ArgumentsProvider {
+        override fun provideArguments(context: ExtensionContext): Stream<out Arguments> {
+            return Stream.of(
+                Arguments.of("two1nine", 29),
+                Arguments.of("eightwothree", 83),
+                Arguments.of("abcone2threexyz", 13),
+                Arguments.of("xtwone3four", 24),
+                Arguments.of("4nineeightseven2", 42),
+                Arguments.of("zoneight234", 14),
+                Arguments.of("7pqrstsixteen", 76),
+                Arguments.of("9eightszgdhftggrktkzbsmnhtwonekh", 91),
+            )
+        }
+    }
 }
